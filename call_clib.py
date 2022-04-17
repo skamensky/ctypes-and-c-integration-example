@@ -13,7 +13,7 @@ from typing import List
 from logging import getLogger,basicConfig
 from functools import wraps
 
-basicConfig(level="INFO",format="[%(asctime)s]: %(message)s")
+basicConfig(level="INFO",format="[LogFromPy]: %(message)s")
 
 class OurStruct(Structure):
     _fields_ = [("number", c_int), ("string", c_char_p)]
@@ -136,7 +136,7 @@ def main():
     test_pointer_all_c_side()
     test_mixed_pointers(int_arg=3333, string_arg="Not")
     test_mixed_pointers_2(int_arg=4444, string_arg="Judgmental")
-    test_py_primes_vs_c_primes()
+    # test_py_primes_vs_c_primes()
 
 if __name__=='__main__':
     main()

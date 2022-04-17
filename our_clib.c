@@ -5,7 +5,7 @@
 #include <string.h>
 
 # define noBuffPrintf(format,...) \
-    fprintf(stderr,"[LogFromC]: " format, __VA_ARGS__)
+    fprintf(stderr,"[LogFromC ]: " format, __VA_ARGS__)
 
 
 
