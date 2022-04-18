@@ -17,4 +17,7 @@ The output will display `python` and `c` interacting via `ctypes`:
 [LogFromC ]: OurStruct([number={3333},string={Not}])
 [LogFromPy]: Calling test_mixed_pointers_2
 [LogFromC ]: OurStruct([number={4444},string={Judgmental}])
+[LogFromPy]: Calling test_py_primes_vs_c_primes
+[LogFromPy]: Computing the first 350,000 primes in both c and python. This can take a minute...
+[LogFromPy]: It took python 30 seconds and c 4 seconds to complete the computation. Using c gives you a 8.57x speedup.
 ```

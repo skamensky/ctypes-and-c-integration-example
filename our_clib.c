@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
-#include <string.h>
 
 # define noBuffPrintf(format,...) \
     fprintf(stderr,"[LogFromC ]: " format, __VA_ARGS__)
-
-
 
 typedef struct OurStruct
 {
@@ -40,31 +36,15 @@ int primitive_function(int intArg, char *strArg)
 
 int isPrime(int number)
 {
-
-    if (number == 1)
-    {
-        return 0;
-    }
-
-    if (number == 2)
-
-    {
-        return 1;
-    }
-
-    if (number % 2 == 0)
-
-    {
-        return 0;
-    }
+    if (number == 1){ return 0; }
+    if (number == 2){ return 1; }
+    if (number % 2 == 0){ return 0; }
 
     for (int i = 3; i <= (int)sqrt((double)number); i++)
     {
-        if (number % i == 0)
-        {
-            return 0;
-        }
+        if (number % i == 0) { return 0; }
     }
+
     return 1;
 }
 

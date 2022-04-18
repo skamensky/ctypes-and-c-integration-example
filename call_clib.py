@@ -5,7 +5,6 @@ from ctypes import (
     c_char_p,
     c_int,
 )
-from ctypes.wintypes import POINT
 from pathlib import Path
 from math import sqrt
 from time import monotonic
@@ -24,7 +23,7 @@ OurStructPtrType = POINTER(OurStruct)
 
 BASE_DIR = Path(Path(__file__).parent)
 our_clib = CDLL(Path(BASE_DIR, "our_clib.so"))
-our_clib.OurStruct_new.restype = POINTER(OurStruct)
+our_clib.OurStruct_new.restype = OurStructPtrType
 our_clib.OurStruct_display.restype = None
 our_clib.OurStruct_destroy.restype = None
 our_clib.getFirstNPrimes.restype = POINTER(c_int)
@@ -67,7 +66,6 @@ def get_first_n_primes(n:int)->List[int]:
 def test_py_primes_vs_c_primes():
     num_primes_to_compute = 350_000
     getLogger().info(f"Computing the first {num_primes_to_compute:,} primes in both c and python. This can take a minute...")
-    # first_10k_primes = [int(num) for num in Path(BASE_DIR,'first10kPrimes.txt').read_text().splitlines()]
     before_py = monotonic()
     primes_from_python = get_first_n_primes(num_primes_to_compute)
     after_py = monotonic()
@@ -78,8 +76,7 @@ def test_py_primes_vs_c_primes():
     # index access to a c-type pointer is similar to pointer arithmetic
     primes_from_c = [primes_from_c_ptr[i] for i in range(num_primes_to_compute)]
 
-    # assert primes_from_python==first_10k_primes
-    # assert primes_from_c==first_10k_primes
+    assert primes_from_c==primes_from_python
 
     py_time = after_py-before_py
     c_time = after_c-before_c
@@ -136,7 +133,7 @@ def main():
     test_pointer_all_c_side()
     test_mixed_pointers(int_arg=3333, string_arg="Not")
     test_mixed_pointers_2(int_arg=4444, string_arg="Judgmental")
-    # test_py_primes_vs_c_primes()
+    test_py_primes_vs_c_primes()
 
 if __name__=='__main__':
     main()
